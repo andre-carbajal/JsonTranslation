@@ -1,4 +1,5 @@
 import os
+import shutil
 
 def main():
     all_languages = {
@@ -26,6 +27,7 @@ def main():
     ]
 
     dir = 'C:/Users/andre/Documentos/aproyectos/JsonTT/input/'
+    output = 'C:/Users/andre/Documentos/aproyectos/JsonTT/output/'
     for LangCode in LangCodeList:
         old_name = os.path.join(dir, LangCode + '.json')
         print(old_name)
@@ -33,6 +35,7 @@ def main():
         print(new_name)
 
         os.rename(old_name, new_name)
+        shutil.move(new_name, output+all_languages[LangCode] + '.json')
 
 if __name__ == '__main__':
     main()
