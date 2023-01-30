@@ -11,7 +11,8 @@ def main():
         'de' : 'de_de',
         'it' : 'it_it',
         'ko' : 'ko_kr',
-        'ru': 'ru_ru'
+        'ru': 'ru_ru',
+        'pt': 'pt_br'
     }
 
     LangCodeList = [
@@ -23,7 +24,8 @@ def main():
         'de',
         'it',
         'ko',
-        'ru'
+        'ru',
+        'pt'
     ]
 
     dir = 'C:/Users/andre/Documentos/aproyectos/JsonTT/input/'
