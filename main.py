@@ -32,12 +32,12 @@ def main():
     output = 'C:/Users/andre/Documentos/aproyectos/JsonTT/output/'
     for LangCode in LangCodeList:
         old_name = os.path.join(dir, LangCode + '.json')
-        print(old_name)
         new_name = os.path.join(dir, all_languages[LangCode] + '.json')
-        print(new_name)
 
         os.rename(old_name, new_name)
+        print(LangCode + '.json' + ' -> ' + all_languages[LangCode] + '.json')
         shutil.move(new_name, output+all_languages[LangCode] + '.json')
+        print(all_languages[LangCode] + '.json' + ' was moved')
 
 if __name__ == '__main__':
     main()
