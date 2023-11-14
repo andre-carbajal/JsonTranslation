@@ -1,7 +1,19 @@
 import os
 import json
 import concurrent.futures
-from deep_translator import GoogleTranslator
+from dotenv import load_dotenv
+from azure.ai.translation.text import TextTranslationClient, TranslatorCredential
+from azure.ai.translation.text.models import InputTextItem
+from azure.core.exceptions import HttpResponseError
+
+load_dotenv()
+
+key = os.getenv('KEY')
+endpoint = os.getenv('ENDPOINT')
+region = "global"
+
+credential = TranslatorCredential(key, region)
+text_translator = TextTranslationClient(endpoint=endpoint, credential=credential)
 
 input = 'input/en_us.json'
 
@@ -21,9 +33,17 @@ languages = {
 
 def translate_string(lang_code, string):
     try:
-        return GoogleTranslator(source='en', target=lang_code).translate(string)
-    except Exception as e:
-        print(f"Error occurred during translation: {e}")
+        input_text_elements = [ InputTextItem(text = string) ]
+        response = text_translator.translate(content = input_text_elements, to = [lang_code], from_parameter = 'en')
+        translation = response[0] if response else None
+
+        if translation:
+            for translated_text in translation.translations:
+                return translated_text.text
+
+    except HttpResponseError as exception:
+        print(f"Error Code: {exception.error.code}")
+        print(f"Message: {exception.error.message}")
         return string  # return original string if translation fails
 
 def translate_file(file_path):
