@@ -60,6 +60,8 @@ def translate_file(file_path):
 
     # Loop over the languages
     for lang, lang_code in languages.items():
+        print(f"Starting translation for language: {lang_code}")  # Print when translation starts
+
         # Create a new dictionary to hold the translated content
         translated_content = {}
 
@@ -70,6 +72,8 @@ def translate_file(file_path):
                 # Translate the value and add it to the translated_content dictionary
                 future = executor.submit(translate_string, lang, value)
                 translated_content[key] = future.result()
+
+        print(f"Finished translation for language: {lang_code}")  # Print when translation ends
 
         # Check if output directory exists, if not, create it
         if not os.path.exists('output'):
