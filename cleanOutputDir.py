@@ -1,5 +1,5 @@
-import os
 import glob
+import os
 
 # Specify the directory you want to clean up
 dir_folder = 'output'
@@ -15,5 +15,6 @@ if os.path.exists(dir_folder):
             os.remove(file)
         except OSError as e:
             print("Error: %s : %s" % (file, e.strerror))
+    print(f"Directory {dir_folder} cleaned successfully.")
 else:
     print(f"The directory {dir_folder} does not exist.")
