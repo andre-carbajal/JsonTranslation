@@ -2,12 +2,12 @@ import os
 import glob
 
 # Specify the directory you want to clean up
-dir = 'output'
+dir_folder = 'output'
 
 # Check if the directory exists
-if os.path.exists(dir):
+if os.path.exists(dir_folder):
     # Use glob to match all files in the directory
-    files = glob.glob(f'{dir}/*')
+    files = glob.glob(f'{dir_folder}/*')
 
     # Iterate over the list of filepaths & remove each file.
     for file in files:
@@ -16,4 +16,4 @@ if os.path.exists(dir):
         except OSError as e:
             print("Error: %s : %s" % (file, e.strerror))
 else:
-    print(f"The directory {dir} does not exist.")
+    print(f"The directory {dir_folder} does not exist.")

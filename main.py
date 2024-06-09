@@ -1,40 +1,41 @@
-import os
-import json
 import concurrent.futures
-from dotenv import load_dotenv
-from azure.ai.translation.text import TextTranslationClient, TranslatorCredential
+import json
+import os
+
+from azure.ai.translation.text import TextTranslationClient
 from azure.ai.translation.text.models import InputTextItem
+from azure.core.credentials import AzureKeyCredential
 from azure.core.exceptions import HttpResponseError
+from dotenv import load_dotenv
 
 load_dotenv()
 
-key = os.getenv('KEY')
 endpoint = os.getenv('ENDPOINT')
-region = "global"
+credential = AzureKeyCredential(key=os.getenv('KEY'))
 
-credential = TranslatorCredential(key, region)
-text_translator = TextTranslationClient(endpoint=endpoint, credential=credential)
+client = TextTranslationClient(endpoint=endpoint, credential=credential)
 
-input = 'input/en_us.json'
+input_file = 'input/en_us.json'
 
 languages = {
-        #"source_language" : "file_name"
-        'zh-CN': 'zh_cn',
-        'zh-TW' : 'zh_tw',
-        'fr': 'fr_fr',
-        'de' : 'de_de',
-        'it' : 'it_it',
-        'ja' : 'ja_jp',
-        'ko' : 'ko_kr',
-        'pt': 'pt_br',
-        'ru': 'ru_ru',
-        'uk': 'uk_ua'
-    }
+    # "source_language" : "file_name"
+    'zh-CN': 'zh_cn',
+    'zh-TW': 'zh_tw',
+    'fr': 'fr_fr',
+    'de': 'de_de',
+    'it': 'it_it',
+    'ja': 'ja_jp',
+    'ko': 'ko_kr',
+    'pt': 'pt_br',
+    'ru': 'ru_ru',
+    'uk': 'uk_ua'
+}
+
 
 def translate_string(lang_code, string):
     try:
-        input_text_elements = [ InputTextItem(text = string) ]
-        response = text_translator.translate(content = input_text_elements, to = [lang_code], from_parameter = 'en')
+        input_text_elements = [InputTextItem(text=string)]
+        response = client.translate(body=input_text_elements, to_language=[lang_code], from_language='en')
         translation = response[0] if response else None
 
         if translation:
@@ -45,6 +46,7 @@ def translate_string(lang_code, string):
         print(f"Error Code: {exception.error.code}")
         print(f"Message: {exception.error.message}")
         return string  # return original string if translation fails
+
 
 def translate_file(file_path):
     try:
@@ -85,8 +87,9 @@ def translate_file(file_path):
                 json.dump(translated_content, file, ensure_ascii=False, indent=4)
         except Exception as e:
             print(f"Error occurred while writing file: {e}")
-    
+
     print('Done!')
 
+
 if __name__ == '__main__':
-    translate_file(input)
+    translate_file(input_file)
