@@ -92,6 +92,14 @@ def translate_file(file_path):
     print('Done!')
 
 
+def check_env_file_created():
+    if os.path.exists('.env'):
+        print(".env file exists.")
+    else:
+        print(".env file does not exist. Please create it with your Azure Text Translation service key and endpoint.")
+
+
 if __name__ == '__main__':
+    check_env_file_created()
     subprocess.call(['python3', 'cleanOutputDir.py'])
     translate_file(input_file)
