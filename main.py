@@ -1,23 +1,25 @@
-import os
-import json
 import concurrent.futures
+import json
+import os
+
 from deep_translator import GoogleTranslator
 
-input = 'input/en_us.json'
+input_file = 'input/en_us.json'
 
 languages = {
-        #"source_language" : "file_name"
-        'zh-CN': 'zh_cn',
-        'zh-TW' : 'zh_tw',
-        'fr': 'fr_fr',
-        'de' : 'de_de',
-        'it' : 'it_it',
-        'ja' : 'ja_jp',
-        'ko' : 'ko_kr',
-        'pt': 'pt_br',
-        'ru': 'ru_ru',
-        'uk': 'uk_ua'
-    }
+    # "source_language" : "file_name"
+    'zh-CN': 'zh_cn',
+    'zh-TW': 'zh_tw',
+    'fr': 'fr_fr',
+    'de': 'de_de',
+    'it': 'it_it',
+    'ja': 'ja_jp',
+    'ko': 'ko_kr',
+    'pt': 'pt_br',
+    'ru': 'ru_ru',
+    'uk': 'uk_ua'
+}
+
 
 def translate_string(lang_code, string):
     try:
@@ -25,6 +27,7 @@ def translate_string(lang_code, string):
     except Exception as e:
         print(f"Error occurred during translation: {e}")
         return string  # return original string if translation fails
+
 
 def translate_file(file_path):
     try:
@@ -65,8 +68,9 @@ def translate_file(file_path):
                 json.dump(translated_content, file, ensure_ascii=False, indent=4)
         except Exception as e:
             print(f"Error occurred while writing file: {e}")
-    
+
     print('Done!')
 
+
 if __name__ == '__main__':
-    translate_file(input)
+    translate_file(input_file)
