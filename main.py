@@ -29,7 +29,8 @@ languages = {
     'ko': 'ko_kr',
     'pt': 'pt_br',
     'ru': 'ru_ru',
-    'uk': 'uk_ua'
+    'uk': 'uk_ua',
+    'es': 'es_es'
 }
 
 
