@@ -30,7 +30,8 @@ languages = {
     'pt': 'pt_br',
     'ru': 'ru_ru',
     'uk': 'uk_ua',
-    'es': 'es_es'
+    'es': 'es_es',
+    'pl': 'pl_pl',
 }
 
 
