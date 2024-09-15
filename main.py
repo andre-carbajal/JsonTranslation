@@ -18,7 +18,8 @@ languages = {
     'pt': 'pt_br',
     'ru': 'ru_ru',
     'uk': 'uk_ua',
-    'es': 'es_es'
+    'es': 'es_es',
+    'pl': 'pl_pl'
 }
 
 
@@ -44,7 +45,7 @@ def translate_file(file_path):
 
     # Loop over the languages
     for lang, lang_code in languages.items():
-        print(f"Starting translation for language: {lang_code}")  # Print when translation starts
+        print(f"Starting translation for language: {lang_code}")
 
         # Create a new dictionary to hold the translated content
         translated_content = {}
