@@ -15,7 +15,7 @@ The translation process is performed concurrently for each key-value pair in the
 To install the necessary dependencies, run the following command:
 
 ```bash
-pip install deep_translator
+pip install -r requirements.txt
 ```
 
 ## Usage

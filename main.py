@@ -1,6 +1,7 @@
 import concurrent.futures
 import json
 import os
+import subprocess
 
 from deep_translator import GoogleTranslator
 
@@ -75,4 +76,5 @@ def translate_file(file_path):
 
 
 if __name__ == '__main__':
+    subprocess.call(['python3', 'cleanOutputDir.py'])
     translate_file(input_file)
